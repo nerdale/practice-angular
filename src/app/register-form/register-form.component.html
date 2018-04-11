@@ -1,0 +1,21 @@
+<h2>
+    Formulario de Registro
+</h2>
+
+<form [formGroup]="userForm">
+    <input type="text" formControlName="name">
+    <p *ngIf="userForm.get('name').status === 'INVALID' && !userForm.get('name').pristine" style="color:red;">Debes ingresar nombre</p>
+    <input type="number" formControlName="age">
+    <p *ngIf="userForm.get('age').status === 'INVALID' && !userForm.get('age').pristine" style="color:red;">Debes ser mayor de 18 años</p>
+    <input type="text" formControlName="mail">
+    <p *ngIf="userForm.get('mail').status === 'INVALID' && !userForm.get('mail').pristine" style="color:red;">Debes ingresar tu correo</p>
+</form>
+
+<p>Form value: {{ userForm.value | json }} </p>
+
+<!-- Para validadores -->
+<p>Form Status: {{ userForm.status | json }} </p>
+<!-- Para estados, para saber si se tocó o no -->
+<p>Form Pristine: {{ userForm.get('name').pristine | json }} </p>
+<!-- Para estados, para saber si se tocó o no -->
+<p>Form Untouched: {{ userForm.get('mail').untouched | json }} </p>
