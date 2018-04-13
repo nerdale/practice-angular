@@ -1,15 +1,37 @@
-<h2>
-    Formulario de Registro
-</h2>
+<div *ngIf="!(authService.user | async)">
+    <!--esto es para que el formulario solo aparezca en la pantalla si no estamos loguedos-->
 
-<form [formGroup]="userForm">
-    <input type="text" formControlName="name">
-    <p *ngIf="userForm.get('name').status === 'INVALID' && !userForm.get('name').pristine" style="color:red;">Debes ingresar nombre</p>
-    <input type="number" formControlName="age">
-    <p *ngIf="userForm.get('age').status === 'INVALID' && !userForm.get('age').pristine" style="color:red;">Debes ser mayor de 18 años</p>
-    <input type="text" formControlName="mail">
-    <p *ngIf="userForm.get('mail').status === 'INVALID' && !userForm.get('mail').pristine" style="color:red;">Debes ingresar tu correo</p>
-</form>
+
+    <h2>
+        Formulario de Registro
+    </h2>
+
+    <form [formGroup]="userForm">
+        <div>
+            <input type="text" formControlName="name">
+            <p *ngIf="userForm.get('name').status === 'INVALID' && !userForm.get('name').pristine" style="color:red;">Debes ingresar nombre</p>
+        </div>
+        <div>
+            <input type="number" formControlName="age">
+            <p *ngIf="userForm.get('age').status === 'INVALID' && !userForm.get('age').pristine" style="color:red;">Debes ser mayor de 18 años</p>
+        </div>
+        <div>
+            <input type="text" formControlName="mail">
+            <p *ngIf="userForm.get('mail').status === 'INVALID' && !userForm.get('mail').pristine" style="color:red;">Debes ingresar tu correo</p>
+        </div>
+        <div>
+            <input type="text" formControlName="password" placeholder="Contraseña">
+            <p *ngIf="userForm.get('password').status == 'INVALID'&& !userForm.get('password').pristine" style="color:red">Debes ingresar tu contraseña</p>
+        </div>
+        <div>
+            <button (click)="onRegisterClick()">Registrar</button>
+        </div>
+    </form>
+</div>
+<div>
+    <button (click)="onClickLogout()">Desloguear</button>
+    <!--Boton de deslogueo, debiera estar en otro componente -->
+</div>
 
 <p>Form value: {{ userForm.value | json }} </p>
 
